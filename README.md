@@ -1,5 +1,7 @@
 # Find A Friend API
 
+An API to find pets for adoption.
+
 ## Functional Requirements
 
 - [ ] It should be able to register a pet
@@ -25,4 +27,3 @@
   - Size: small, medium, large
   - Energy level: 1 to 5
   - Independency level: low, medium, high
-  
