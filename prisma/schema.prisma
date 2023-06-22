@@ -9,3 +9,86 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum PetAge {
+  NEWBORN
+  JUNIOR
+  TEEN
+  FULL_GROWN
+}
+
+enum PetSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum PetEnergyLevel {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
+}
+
+enum PetIndependencyLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum PetRequiredEnvironment {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+model Pet {
+  id                  String                 @id @unique @default(uuid())
+  name                String
+  bio                 String?                @db.VarChar(300)
+  age                 PetAge
+  size                PetSize
+  energyLevel         PetEnergyLevel
+  independencyLevel   PetIndependencyLevel
+  requiredEnvironment PetRequiredEnvironment
+  photos              String[]
+  adoptionRequests    String[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("pets")
+}
+
+model User {
+  id    String   @id @unique @default(uuid())
+  name  String
+  phone String
+  email String   @unique
+  role  UserRole @default(MEMBER)
+  pets  Pet[]
+
+  address   Address @relation(fields: [addressId], references: [id])
+  addressId String  @unique
+
+  @@map("users")
+}
+
+model Address {
+  id      String @id @unique @default(uuid())
+  street  String
+  number  String
+  town    String
+  city    String
+  state   String
+  zipCode String
+  user    User?
+
+  @@map("addresses")
+}
