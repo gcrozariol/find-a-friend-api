@@ -53,7 +53,7 @@ describe('Fetch pets by characteristics use case', () => {
     ])
   })
 
-  it('should be return the pet related to the filter', async () => {
+  it('should return the pet related to the filter', async () => {
     await petsRepository.register({
       userId: 'user-01',
       name: 'Devil',

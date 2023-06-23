@@ -12,4 +12,5 @@ export interface PetCharacteristics {
 export interface PetsRepository {
   register(data: PetRegisterUseCaseRequest): Promise<Pet>
   findManyByCharacteristics(characteristics: PetCharacteristics): Promise<Pet[]>
+  getPetById(id: string): Promise<Pet | null>
 }
