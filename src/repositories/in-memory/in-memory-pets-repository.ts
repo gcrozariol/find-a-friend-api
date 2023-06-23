@@ -1,19 +1,55 @@
 import { Pet } from '@/interfaces/pet'
-import { PetsRepository } from '../pets-repository'
+import { PetCharacteristics, PetsRepository } from '../pets-repository'
 import { PetRegisterUseCaseRequest } from '@/use-cases/register-pet'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryPetsRepository implements PetsRepository {
   items: Pet[] = []
 
-  async register(data: PetRegisterUseCaseRequest) {
+  async findManyByCharacteristics({
+    age,
+    size,
+    energyLevel,
+    independencyLevel,
+    requiredEnvironment,
+  }: PetCharacteristics) {
+    const pets = this.items.filter(
+      (item) =>
+        item.age === age &&
+        item.size === size &&
+        item.energyLevel === energyLevel &&
+        item.independencyLevel === independencyLevel &&
+        item.requiredEnvironment === requiredEnvironment,
+    )
+
+    return pets
+  }
+
+  async register({
+    name,
+    bio,
+    age,
+    size,
+    energyLevel,
+    independencyLevel,
+    requiredEnvironment,
+    photos,
+    adoptionRequests,
+    userId,
+  }: PetRegisterUseCaseRequest) {
     const pet: Pet = {
-      ...data,
+      name,
+      age,
+      size,
+      energyLevel,
+      independencyLevel,
+      requiredEnvironment,
       id: randomUUID(),
-      bio: data.bio ?? null,
-      photos: data.photos ?? [],
-      adoptionRequests: data.adoptionRequests ?? [],
+      bio: bio ?? null,
+      photos: photos ?? [],
+      adoptionRequests: adoptionRequests ?? [],
       createdAt: new Date(),
+      userId,
     }
 
     this.items.push(pet)

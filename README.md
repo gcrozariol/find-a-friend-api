@@ -4,11 +4,11 @@ An API to find pets for adoption.
 
 ## Functional Requirements
 
-- [ ] It should be able to register a pet
+- [x] It should be able to register a pet
 - [ ] It should be able to fetch a list of pets filtered by city
 - [ ] It should be able to fetch a list of pets based on its characteristics
 - [ ] It should be able to get details from a pet
-- [ ] It should be able to register an NPO
+- [x] It should be able to register an NPO
 - [ ] It should be able to log in as an NPO
 
 ## Business Rules

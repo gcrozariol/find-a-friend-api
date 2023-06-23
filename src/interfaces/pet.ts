@@ -10,4 +10,5 @@ export interface Pet {
   photos: string[]
   adoptionRequests: string[]
   createdAt: Date
+  userId: string
 }
