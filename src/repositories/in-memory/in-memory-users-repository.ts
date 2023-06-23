@@ -6,6 +6,12 @@ import { User } from '@/interfaces/user'
 export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
 
+  async findByCity(city: string) {
+    const users = this.items.filter((item) => item.address.city === city)
+
+    return users
+  }
+
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)
 
@@ -31,6 +37,7 @@ export class InMemoryUsersRepository implements UsersRepository {
         id: randomUUID(),
         town: address.town ?? null,
       },
+      pets: [],
     }
 
     this.items.push(user)

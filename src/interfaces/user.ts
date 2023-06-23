@@ -1,3 +1,5 @@
+import { Pet } from './pet'
+
 interface Address {
   id: string
   street: string
@@ -16,4 +18,5 @@ export interface User {
   passwordHash: string
   role: 'ADMIN' | 'MEMBER'
   address: Address
+  pets: Pet[]
 }

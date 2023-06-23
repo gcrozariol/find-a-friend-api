@@ -16,6 +16,10 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
+  async findManyByCity(city: string): Promise<Pet[]> {
+    throw new Error('Method not implemented.')
+  }
+
   async findManyByCharacteristics({
     age,
     size,
