@@ -1,4 +1,4 @@
-import { RegisterUseCaseRequest } from '@/use-cases/register'
+import { RegisterUseCaseRequest } from '@/use-cases/register-user'
 import { UsersRepository } from '../users-repository'
 import { prisma } from '@/lib/prisma'
 

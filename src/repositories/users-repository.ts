@@ -1,5 +1,5 @@
 import { User } from '@/interfaces/user'
-import { RegisterUseCaseRequest } from '@/use-cases/register'
+import { RegisterUseCaseRequest } from '@/use-cases/register-user'
 
 export interface UsersRepository {
   create(user: RegisterUseCaseRequest): Promise<User>

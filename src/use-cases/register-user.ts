@@ -23,7 +23,7 @@ export interface RegisterUseCaseRequest {
   address: AddressRequest
 }
 
-export interface RegisterUseCaseResponse {
+interface RegisterUseCaseResponse {
   user: User
 }
 
