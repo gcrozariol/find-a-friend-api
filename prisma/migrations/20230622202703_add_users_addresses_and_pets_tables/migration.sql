@@ -49,8 +49,8 @@ CREATE TABLE "users" (
 CREATE TABLE "addresses" (
     "id" TEXT NOT NULL,
     "street" TEXT NOT NULL,
-    "number" TEXT NOT NULL,
-    "town" TEXT NOT NULL,
+    "number" DECIMAL(65,30) NOT NULL,
+    "town" TEXT,
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "zipCode" TEXT NOT NULL,
