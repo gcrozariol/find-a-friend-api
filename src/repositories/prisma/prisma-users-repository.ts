@@ -3,6 +3,22 @@ import { UsersRepository } from '../users-repository'
 import { prisma } from '@/lib/prisma'
 
 export class PrismaUsersRepository implements UsersRepository {
+  async findByCity(city: string) {
+    const users = prisma.user.findMany({
+      where: {
+        address: {
+          city,
+        },
+      },
+      include: {
+        address: true,
+        pets: true,
+      },
+    })
+
+    return users
+  }
+
   async create(data: RegisterUseCaseRequest) {
     const { address: userAddress, password, ...userData } = data
 
@@ -18,6 +34,7 @@ export class PrismaUsersRepository implements UsersRepository {
       },
       include: {
         address: true,
+        pets: true,
       },
     })
 
