@@ -16,10 +16,6 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async findManyByCity(city: string): Promise<Pet[]> {
-    throw new Error('Method not implemented.')
-  }
-
   async findManyByCharacteristics({
     age,
     size,
@@ -29,11 +25,15 @@ export class InMemoryPetsRepository implements PetsRepository {
   }: PetCharacteristics) {
     const pets = this.items.filter(
       (item) =>
-        item.age === age &&
-        item.size === size &&
-        item.energyLevel === energyLevel &&
-        item.independencyLevel === independencyLevel &&
-        item.requiredEnvironment === requiredEnvironment,
+        (age ? item.age === age : true) &&
+        (size ? item.size === size : true) &&
+        (energyLevel ? item.energyLevel === energyLevel : true) &&
+        (independencyLevel
+          ? item.independencyLevel === independencyLevel
+          : true) &&
+        (requiredEnvironment
+          ? item.requiredEnvironment === requiredEnvironment
+          : true),
     )
 
     return pets
@@ -52,13 +52,13 @@ export class InMemoryPetsRepository implements PetsRepository {
     userId,
   }: PetRegisterUseCaseRequest) {
     const pet: Pet = {
+      id: randomUUID(),
       name,
       age,
       size,
       energyLevel,
       independencyLevel,
       requiredEnvironment,
-      id: randomUUID(),
       bio: bio ?? null,
       photos: photos ?? [],
       adoptionRequests: adoptionRequests ?? [],

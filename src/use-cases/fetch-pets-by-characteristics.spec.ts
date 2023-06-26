@@ -53,7 +53,33 @@ describe('Fetch pets by characteristics use case', () => {
     ])
   })
 
-  it('should return the pet related to the filter', async () => {
+  it('should be able to fetch all pets', async () => {
+    await petsRepository.register({
+      userId: 'user-01',
+      name: 'Devil',
+      age: 'FULL_GROWN',
+      size: 'SMALL',
+      energyLevel: 'ONE',
+      independencyLevel: 'MEDIUM',
+      requiredEnvironment: 'MEDIUM',
+    })
+
+    const { pets } = await sut.execute({})
+
+    expect(pets).toHaveLength(2)
+    expect(pets).toEqual([
+      expect.objectContaining({
+        id: expect.any(String),
+        name: 'Angel',
+      }),
+      expect.objectContaining({
+        id: expect.any(String),
+        name: 'Devil',
+      }),
+    ])
+  })
+
+  it('should return only full grown pets', async () => {
     await petsRepository.register({
       userId: 'user-01',
       name: 'Devil',

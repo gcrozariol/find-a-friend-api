@@ -1,4 +1,5 @@
 import { Pet } from '@/interfaces/pet'
+import { User } from '@/interfaces/user'
 import { UsersRepository } from '@/repositories/users-repository'
 
 interface FetchPetsByCityUseCaseRequest {
@@ -6,6 +7,7 @@ interface FetchPetsByCityUseCaseRequest {
 }
 
 interface FetchPetsByCityUseCaseResponse {
+  users: User[]
   pets: Pet[]
 }
 
@@ -23,6 +25,6 @@ export class FetchPetsByCityUseCase {
       pets.push(...user.pets)
     }
 
-    return { pets }
+    return { users, pets }
   }
 }
