@@ -16,6 +16,6 @@ An API to find pets for adoption.
 - [x] The user must inform a city in order to fetch a list of pets
 - [x] An NPO must have an address and a WhatsApp phone number
 - [x] A pet must be linked to an NPO
-- [ ] The user that wants to adopt a pet will get in touch with the NPM via WhatsApp
+- [x] The user that wants to adopt a pet will get in touch with the NPM via WhatsApp
 - [x] All filters are optional when filtering pets, however the city is required
 - [x] In order for the NPO to access the app as administrator, it should be logged
