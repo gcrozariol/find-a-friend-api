@@ -1,0 +1,71 @@
+import { hash } from 'bcryptjs'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { AuthenticateUseCase } from './authenticate'
+import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
+import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+
+let usersRepository: InMemoryUsersRepository
+let sut: AuthenticateUseCase
+
+describe('Authenticate use case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new AuthenticateUseCase(usersRepository)
+  })
+
+  it('should be able to authenticate', async () => {
+    await usersRepository.create({
+      name: 'John Doe',
+      phone: '+1 647-675-3313',
+      email: 'johndoe@example.com',
+      password: await hash('123456', 6),
+      address: {
+        street: 'Deerford Rd.',
+        number: 12,
+        city: 'Toronto',
+        state: 'ON',
+        zipCode: 'M2J 3J3',
+      },
+    })
+
+    const { user } = await sut.execute({
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    expect(user.id).toEqual(expect.any(String))
+    expect(user.email).toEqual('johndoe@example.com')
+  })
+
+  it('should not be able to authenticate with wrong email', async () => {
+    await expect(() =>
+      sut.execute({
+        email: 'johndoe@example.com',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+  })
+
+  it('should not be able to authenticate with wrong password', async () => {
+    await usersRepository.create({
+      name: 'John Doe',
+      phone: '+1 647-675-3313',
+      email: 'johndoe@example.com',
+      password: await hash('123456', 6),
+      address: {
+        street: 'Deerford Rd.',
+        number: 12,
+        city: 'Toronto',
+        state: 'ON',
+        zipCode: 'M2J 3J3',
+      },
+    })
+
+    await expect(() =>
+      sut.execute({
+        email: 'johndoe@example.com',
+        password: '123123',
+      }),
+    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+  })
+})

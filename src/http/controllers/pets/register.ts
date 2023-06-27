@@ -1,5 +1,4 @@
 import { makeRegisterPetUseCase } from '@/use-cases/factories/make-register-pet-use-case'
-import { randomUUID } from 'crypto'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -14,14 +13,13 @@ export async function register(req: FastifyRequest, res: FastifyReply) {
     requiredEnvironment: z.enum(['SMALL', 'MEDIUM', 'LARGE']),
     photos: z.string().array().optional(),
     adoptionRequests: z.string().array().optional(),
-    userId: z.string().uuid(),
   })
 
   const data = registerBodySchema.parse(req.body)
 
   const useCase = makeRegisterPetUseCase()
 
-  await useCase.execute({ id: randomUUID(), ...data })
+  await useCase.execute({ ...data, userId: req.user.sub })
 
   res.status(201).send()
 }
