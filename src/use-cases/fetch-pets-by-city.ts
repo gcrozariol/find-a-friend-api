@@ -3,7 +3,7 @@ import { User } from '@/interfaces/user'
 import { UsersRepository } from '@/repositories/users-repository'
 
 interface FetchPetsByCityUseCaseRequest {
-  city: string
+  cityId: string
 }
 
 interface FetchPetsByCityUseCaseResponse {
@@ -15,9 +15,9 @@ export class FetchPetsByCityUseCase {
   constructor(private usersRepoitory: UsersRepository) {}
 
   async execute({
-    city,
+    cityId,
   }: FetchPetsByCityUseCaseRequest): Promise<FetchPetsByCityUseCaseResponse> {
-    const users = await this.usersRepoitory.findByCity(city)
+    const users = await this.usersRepoitory.findByCity(cityId)
 
     const pets: Pet[] = []
 

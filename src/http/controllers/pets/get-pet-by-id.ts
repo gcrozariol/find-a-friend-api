@@ -3,11 +3,11 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function getPetById(req: FastifyRequest, res: FastifyReply) {
-  const registerBodySchema = z.object({
+  const getPetByIdParamsSchema = z.object({
     id: z.string().uuid(),
   })
 
-  const { id } = registerBodySchema.parse(req.params)
+  const { id } = getPetByIdParamsSchema.parse(req.params)
 
   const useCase = makeGetPetByIdUseCase()
 
