@@ -53,7 +53,7 @@ describe('Fetch pets by city use case', () => {
     user.pets.push(petTwo)
 
     const { pets } = await sut.execute({
-      city: 'Toronto',
+      cityId: 'Toronto',
     })
 
     expect(pets).toHaveLength(2)
@@ -71,7 +71,7 @@ describe('Fetch pets by city use case', () => {
 
   it('should not return pets', async () => {
     const { pets } = await sut.execute({
-      city: 'Toronto',
+      cityId: 'Toronto',
     })
 
     expect(pets).toHaveLength(0)
