@@ -4,6 +4,7 @@ import { z } from 'zod'
 
 export async function register(req: FastifyRequest, res: FastifyReply) {
   const registerBodySchema = z.object({
+    id: z.string().uuid().optional(),
     name: z.string(),
     bio: z.string().optional(),
     age: z.enum(['NEWBORN', 'JUNIOR', 'TEEN', 'FULL_GROWN']),
