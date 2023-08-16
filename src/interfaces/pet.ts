@@ -1,5 +1,3 @@
-import { User } from './user'
-
 export interface Pet {
   id: string
   name: string
