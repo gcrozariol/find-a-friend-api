@@ -25,7 +25,7 @@
     "@types/bcryptjs": "2.4.6",
     "@types/node": "20.14.10",
     "@types/supertest": "6.0.2",
-    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/coverage-v8": "2.0.3",
     "@vitest/ui": "2.0.1",
     "eslint": "9.6.0",
     "npm-run-all": "4.1.5",
@@ -34,7 +34,7 @@
     "tsup": "8.1.0",
     "tsx": "4.16.2",
     "typescript": "5.5.3",
-    "vitest": "1.6.0",
+    "vitest": "2.0.3",
     "vitest-tsconfig-paths": "3.4.1"
   },
   "dependencies": {
